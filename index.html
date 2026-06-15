@@ -161,75 +161,14 @@
       </div>
 
       <!-- List Card -->
-      <div class="cards-wrapper flex gap-x-4.5 mb-72 mt-8">
-        <div class="card-item rounded-lg w-50">
-          <div class="image-wrapper relative">
-            <img
-              src="https://image.tmdb.org/t/p/w500//2I1OFQJ0L9T0dpU6FobKFWV2PxX.jpg"
-              alt="Movie Title"
-              class="w-full h-[300px] object-cover rounded-lg"
-            />
-
-            <!-- Filter -->
-            <div
-              class="filter absolute inset-0 bg-gradient-to-b from-black/80 to-transparent rounded-lg"
-            ></div>
-
-            <!-- Action -->
-            <div
-              class="genre-favorite-btn absolute top-0 w-full flex justify-between items-center px-2 py-3"
-            >
-              <span class="text-xs text-white font-bold leading-none"
-                >SCI-FI · DRAMA</span
-              >
-
-              <div
-                class="favorite-btn w-8 h-8 flex items-center justify-center bg-black/60 rounded-full"
-              >
-                <span
-                  class="favorite-icon material-icons-round text-white cursor-pointer"
-                  style="font-size: 16px"
-                >
-                  favorite
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-content mt-2">
-            <div class="flex items-start justify-between">
-              <a
-                href="#"
-                class="text-white text-sm font-semibold hover:underline"
-              >
-                Chronos Letterbound
-              </a>
-              <div
-                class="rating text-sm text-amber-600 flex items-center gap-1"
-              >
-                <span class="star text-lg leading-none">★</span>
-                <span class="rating-value">8.5</span>
-              </div>
-            </div>
-            <div class="year">
-              <span class="text-sine-gray text-xs">2024</span>
-            </div>
-          </div>
-        </div>
-
+      <div
+        id="cards-wrapper"
+        class="cards-wrapper overflow-x-hidden flex gap-x-4.5 mb-72 mt-8"
+      >
         <!-- <Card /> -->
       </div>
     </div>
 
-    <script>
-      const favoriteBtns = document.querySelectorAll(".favorite-icon");
-
-      favoriteBtns.forEach((button) => {
-        button.addEventListener("click", () => {
-          button.classList.toggle("text-amber-600");
-          button.classList.toggle("text-white");
-        });
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
