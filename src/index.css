@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-clifford: #da373d;
+
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Bebas Neue", sans-serif;
+
+  --color-sine-gray: #9ca3af;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: #14181c;
+}

@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sinemata - React Batch 2</title>
 
-    <title>Sinemata</title>
-
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,157 +19,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-
-        --font-primary: "Inter", sans-serif;
-        --font-secondary: "Bebas Neue", sans-serif;
-
-        --color-sine-gray: #9ca3af;
-      }
-    </style>
   </head>
-  <body class="bg-[#14181C] font-primary">
-    <!-- Navbar -->
-    <nav class="navbar py-5 bg-[#1c2127]">
-      <div
-        class="nav-wrapper flex items-center justify-between max-w-7xl mx-auto"
-      >
-        <div class="nav-content flex gap-x-25">
-          <!-- Logo -->
-          <div class="nav-logo-links flex items-center gap-x-2">
-            <div class="circle-logo bg-amber-600 w-4 h-4 rounded-full"></div>
-            <a
-              class="title-logo text-white font-secondary text-2xl leading-none"
-              href="#"
-              >Sinemata</a
-            >
-          </div>
-
-          <!-- Navigation Links -->
-          <div
-            class="nav-links text-sine-gray flex gap-x-7 items-center font-primary text-sm"
-          >
-            <a class="" href="#">Home</a>
-            <a class="" href="#">Browse</a>
-            <a class="" href="#">Watchlist</a>
-            <a class="" href="#">My Reviews</a>
-          </div>
-        </div>
-
-        <div class="nav-interaction flex items-center gap-x-5.5">
-          <!-- Input Search -->
-          <input
-            class="input-search py-2 px-4 bg-[#232831] border-none rounded-lg font-primary text-sm text-sine-gray"
-            type="text"
-            placeholder="⌕ Search..."
-          />
-
-          <!-- Profile photo -->
-          <div
-            class="profile-photo cursor-pointer flex items-center justify-center w-9 h-9 rounded-full bg-amber-600"
-          >
-            <span
-              class="initials font-primary text-[#14181c] text-sm font-bold"
-            >
-              AB
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile photo -->
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero mt-4 h-fit">
-      <div class="hero-wrapper max-w-7xl mx-auto relative h-[400px]">
-        <div class="image-wrapper absolute w-full h-full">
-          <img
-            src="https://image.tmdb.org/t/p/original//2I1OFQJ0L9T0dpU6FobKFWV2PxX.jpg"
-            alt="Movie Title"
-            class="w-full h-full object-cover rounded-xl shadow-lg object-top inset-0"
-          />
-          <div
-            class="filter absolute inset-0 bg-gradient-to-r from-black/80 to-transparent rounded-xl"
-          ></div>
-        </div>
-
-        <div
-          class="typo-cta py-10 font-primary absolute pl-12 text-white absolute"
-        >
-          <div
-            class="badge py-1 px-2 max-w-fit rounded-sm bg-amber-600/20 border border-amber-600/40"
-          >
-            <span class="badge-text font-bold text-xs text-amber-600">
-              FEATURED THIS WEEK
-            </span>
-          </div>
-          <div class="title mt-[18px]">
-            <h1 class="text-5xl font-bold font-secondary">
-              CHRONOS LETTERBOUND
-            </h1>
-          </div>
-          <div class="metadata text-sm flex gap-3 items-center mt-3">
-            <div class="rating text-amber-600 flex items-center gap-1">
-              <span class="star text-lg">★</span>
-              <span class="rating-value">8.5</span>
-            </div>
-            <div class="movie-data text-slate-400">
-              2024 · 2h 18m · Sci-Fi · Drama
-            </div>
-          </div>
-          <div class="short-description mt-4">
-            <p class="max-w-md text-sm leading-normal text-slate-400">
-              Seorang penjaga arsip menemukan surat-surat dari masa depan yang
-              ditulis untuknya — masing-masing meminta keputusan mustahil.
-            </p>
-          </div>
-          <div class="cta mt-4 flex gap-3">
-            <button
-              class="cursor-pointer py-3 px-6 text-slate-950 bg-amber-600 hover:bg-amber-700 transition-colors rounded-lg font-bold"
-            >
-              ▶ Lihat Detail
-            </button>
-            <button
-              class="cursor-pointer py-3 px-6 text-white bg-white/10 hover:bg-white/20 transition-colors border border-[#3A4049] rounded-lg font-bold"
-            >
-              + Watchlist
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trending List -->
-    <div class="trending-list max-w-7xl mx-auto mt-12">
-      <!-- Heading -->
-      <div class="title-action flex justify-between items-center">
-        <div class="flex items-center gap-x-3">
-          <div class="ornament w-1 h-8 bg-amber-600"></div>
-          <h2 class="text-white font-secondary text-4xl">Trending Now</h2>
-        </div>
-
-        <div class="action">
-          <a class="text-sine-gray text-sm hover:underline" href="">
-            Lihat semua →
-          </a>
-        </div>
-      </div>
-
-      <!-- List Card -->
-      <div
-        id="cards-wrapper"
-        class="cards-wrapper overflow-x-hidden flex gap-x-4.5 mb-72 mt-8"
-      >
-        <!-- <Card /> -->
-      </div>
-    </div>
-
-    <script src="script.js"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
