@@ -36,7 +36,7 @@ function HomeMovieCard({ title, rating, year, posterUrl, genres }) {
           >
             {title}
           </a>
-          <div className="rating text-sm text-amber-600 flex items-center gap-1">
+          <div className="text-sm text-amber-600 flex items-center gap-1">
             <span className="star text-lg leading-none">★</span>
             <span className="rating-value">{rating}</span>
           </div>

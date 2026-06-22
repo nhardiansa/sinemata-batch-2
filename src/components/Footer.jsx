@@ -4,8 +4,6 @@ function Footer() {
   return (
     <div
       className={cn(
-        // name component via class
-        "footer",
         // styling display
         "border-t border-[#2A2F37]",
         // layout setting

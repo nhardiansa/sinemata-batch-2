@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <nav className="navbar py-5 bg-[#1c2127]">
+    <nav className="py-5 bg-[#1c2127]">
       <div className="nav-wrapper flex items-center justify-between max-w-7xl mx-auto">
         <div className="nav-content flex gap-x-25">
           {/* <!-- Logo --> */}
