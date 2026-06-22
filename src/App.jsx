@@ -1,7 +1,9 @@
+import Browse from "./pages/Browse";
 import Home from "./pages/Home";
 
 function App() {
-  return <Home />;
+  // return <Home />;
+  return <Browse />;
 }
 
 export default App;

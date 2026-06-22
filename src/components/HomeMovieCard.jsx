@@ -1,15 +1,15 @@
 function HomeMovieCard({ title, rating, year, posterUrl, genres }) {
   return (
-    <div className="card-item rounded-lg min-w-50 max-w-50">
+    <div className="card-item min-w-50 max-w-50">
       <div className="image-wrapper relative">
         <img
           src={posterUrl || `https://placehold.co/200x300?text=${title}`}
           alt="${title} Poster"
-          className="w-full h-[300px] object-cover rounded-lg"
+          className="w-full h-75 object-cover rounded-lg"
         />
 
         {/* <!-- Filter --> */}
-        <div className="filter absolute inset-0 bg-gradient-to-b from-black/80 to-transparent rounded-lg"></div>
+        <div className="filter absolute inset-0 bg-linear-to-b from-black/80 to-transparent rounded-lg"></div>
 
         {/* <!-- Action --> */}
         <div className="genre-favorite-btn absolute top-0 w-full flex justify-between items-center px-2 py-3">
