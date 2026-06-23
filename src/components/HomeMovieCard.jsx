@@ -1,4 +1,32 @@
-function HomeMovieCard({ title, rating, year, posterUrl, genres }) {
+import { Link } from "react-router";
+import { useWatchlist } from "../store/useWatchlist";
+import { useEffect } from "react";
+
+function HomeMovieCard({ title, rating, year, posterUrl, genres, id = null }) {
+  const { watchlist, addMovieToWatchlist, removeMovieFromWatchlist } =
+    useWatchlist((state) => state);
+
+  useEffect(() => {
+    console.log(watchlist);
+  }, [watchlist]);
+
+  const handlerAddToWatchlist = () => {
+    if (watchlist.find((movie) => movie.id === id)) {
+      removeMovieFromWatchlist({ id });
+      return;
+    }
+
+    addMovieToWatchlist({
+      key: id,
+      id,
+      title,
+      posterUrl,
+      genres,
+      rating,
+      year,
+    });
+  };
+
   return (
     <div className="card-item min-w-50 max-w-50">
       <div className="image-wrapper relative">
@@ -19,7 +47,12 @@ function HomeMovieCard({ title, rating, year, posterUrl, genres }) {
 
           <div className="favorite-btn w-8 h-8 flex items-center justify-center bg-black/60 rounded-full">
             <span
-              className="favorite-icon material-icons-round text-white cursor-pointer"
+              onClick={() => handlerAddToWatchlist()}
+              className={`favorite-icon material-icons-round cursor-pointer ${
+                watchlist.find((movie) => movie.id === id)
+                  ? "text-red-500"
+                  : "text-white"
+              } `}
               style={{ fontSize: "16px" }}
             >
               favorite
@@ -30,12 +63,12 @@ function HomeMovieCard({ title, rating, year, posterUrl, genres }) {
 
       <div className="card-content mt-2">
         <div className="flex items-start justify-between">
-          <a
-            href="#"
+          <Link
+            to={`/movie/${id ? id : "id_not_found"}`}
             className="text-white text-sm font-semibold hover:underline"
           >
             {title}
-          </a>
+          </Link>
           <div className="text-sm text-amber-600 flex items-center gap-1">
             <span className="star text-lg leading-none">★</span>
             <span className="rating-value">{rating}</span>

@@ -1,154 +1,64 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import HomeMovieList from "../components/HomeMovieList";
 import Navbar from "../components/Navbar";
+import { getNowPlayingMovies, getPopularMovies } from "../utils/api";
 
 function Home() {
-  const trendingMovieList = [
-    {
-      title: "Chronos Letterbound",
-      genres: ["Sci-Fi", "Drama"],
-      rating: 8.7,
-      year: 2024,
-      posterUrl: "",
-    },
-    {
-      title: "The Midnight Horizon",
-      genres: ["Sci-Fi", "Thriller", "Mystery"],
-      rating: 8.2,
-      year: 2025,
-      posterUrl: "",
-    },
-    {
-      title: "Echoes of Yesterday",
-      genres: ["Drama", "Romance"],
-      rating: 7.9,
-      year: 2023,
-      posterUrl: "",
-    },
-    {
-      title: "Neon Cyberpunk 2099",
-      genres: ["Sci-Fi", "Action"],
-      rating: 8.5,
-      year: 2026,
-      posterUrl: "",
-    },
-    {
-      title: "The Last Autumn",
-      genres: ["Drama"],
-      rating: 7.5,
-      year: 2022,
-      posterUrl: "",
-    },
-    {
-      title: "Quantum Paradox",
-      genres: ["Sci-Fi", "Mystery", "Adventure"],
-      rating: 8.9,
-      year: 2024,
-      posterUrl: "",
-    },
-    {
-      title: "Silent Symphony",
-      genres: ["Drama", "Music"],
-      rating: 8.0,
-      year: 2021,
-      posterUrl: "",
-    },
-    {
-      title: "Shadows in the Nebula",
-      genres: ["Sci-Fi", "Horror"],
-      rating: 7.2,
-      year: 2025,
-      posterUrl: "",
-    },
-    {
-      title: "Beyond the Looking Glass",
-      genres: ["Fantasy", "Drama", "Mystery"],
-      rating: 8.3,
-      year: 2023,
-      posterUrl: "",
-    },
-    {
-      title: "Stellar Drift",
-      genres: ["Sci-Fi", "Adventure"],
-      rating: 8.6,
-      year: 2024,
-      posterUrl: "",
-    },
-  ];
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
 
-  const recomendedMovieList = [
-    {
-      title: "Chronos Letterbound",
-      genres: ["Sci-Fi", "Drama"],
-      rating: 8.7,
-      year: 2024,
-      posterUrl: "",
-    },
-    {
-      title: "The Midnight Horizon",
-      genres: ["Sci-Fi", "Thriller", "Mystery"],
-      rating: 8.2,
-      year: 2025,
-      posterUrl: "",
-    },
-    {
-      title: "Echoes of Yesterday",
-      genres: ["Drama", "Romance"],
-      rating: 7.9,
-      year: 2023,
-      posterUrl: "",
-    },
-    {
-      title: "Neon Cyberpunk 2099",
-      genres: ["Sci-Fi", "Action"],
-      rating: 8.5,
-      year: 2026,
-      posterUrl: "",
-    },
-    {
-      title: "The Last Autumn",
-      genres: ["Drama"],
-      rating: 7.5,
-      year: 2022,
-      posterUrl: "",
-    },
-    {
-      title: "Quantum Paradox",
-      genres: ["Sci-Fi", "Mystery", "Adventure"],
-      rating: 8.9,
-      year: 2024,
-      posterUrl: "",
-    },
-    {
-      title: "Silent Symphony",
-      genres: ["Drama", "Music"],
-      rating: 8.0,
-      year: 2021,
-      posterUrl: "",
-    },
-    {
-      title: "Shadows in the Nebula",
-      genres: ["Sci-Fi", "Horror"],
-      rating: 7.2,
-      year: 2025,
-      posterUrl: "",
-    },
-    {
-      title: "Beyond the Looking Glass",
-      genres: ["Fantasy", "Drama", "Mystery"],
-      rating: 8.3,
-      year: 2023,
-      posterUrl: "",
-    },
-    {
-      title: "Stellar Drift",
-      genres: ["Sci-Fi", "Adventure"],
-      rating: 8.6,
-      year: 2024,
-      posterUrl: "",
-    },
-  ];
+  const popularHandler = async () => {
+    try {
+      const data = await getPopularMovies();
+
+      const finalResults = data.results.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        genres: movie.genre_ids.map((genre) => genre),
+        rating: movie.vote_average.toFixed(1),
+        year: movie.release_date.split("-")[0],
+        posterUrl: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+          : null,
+      }));
+
+      // just get the first 10 movies
+      setPopularMovies(finalResults.slice(0, 8));
+    } catch (error) {
+      console.error("error while getting popular movies", error);
+      setPopularMovies([]);
+    }
+  };
+
+  const nowPlayingHandler = async () => {
+    try {
+      const data = await getNowPlayingMovies();
+
+      const finalResults = data.results.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        genres: movie.genre_ids.map((genre) => genre),
+        rating: movie.vote_average.toFixed(1),
+        year: movie.release_date.split("-")[0],
+        posterUrl: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+          : null,
+      }));
+
+      // just get the first 10 movies
+      setNowPlayingMovies(finalResults.slice(0, 8));
+    } catch (error) {
+      console.error("error while getting now playing movies", error);
+      setNowPlayingMovies([]);
+    }
+  };
+
+  useEffect(() => {
+    popularHandler();
+    nowPlayingHandler();
+  }, []);
 
   return (
     <>
@@ -159,17 +69,11 @@ function Home() {
 
       {/* Trending List */}
       <div className="mt-12">
-        <HomeMovieList
-          headerTitle="Trending Now"
-          movieList={trendingMovieList}
-        />
+        <HomeMovieList headerTitle="Popular" movieList={popularMovies} />
       </div>
 
       <div className="mt-12">
-        <HomeMovieList
-          headerTitle="Recommended For You"
-          movieList={recomendedMovieList}
-        />
+        <HomeMovieList headerTitle="Now Playing" movieList={nowPlayingMovies} />
       </div>
 
       <Footer />

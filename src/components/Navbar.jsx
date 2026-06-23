@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function Navbar() {
   return (
     <nav className="py-5 bg-[#1c2127]">
@@ -16,15 +18,9 @@ function Navbar() {
 
           {/* <!-- Navigation Links --> */}
           <div className="nav-links text-sine-gray flex gap-x-7 items-center font-primary text-sm">
-            <a className="" href="#">
-              Home
-            </a>
-            <a className="" href="#">
-              Browse
-            </a>
-            <a className="" href="#">
-              Watchlist
-            </a>
+            <Link to="/">Home</Link>
+            <Link to="/browse">Browse</Link>
+            <Link to="/watchlist">Watchlist</Link>
             <a className="" href="#">
               My Reviews
             </a>

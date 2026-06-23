@@ -1,8 +1,9 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BrowseMovieGrid from "../components/BrowseMovieGrid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getMovieSearch } from "../utils/api";
+import { useWatchlist } from "../store/useWatchlist";
 
 function Browse() {
   const [query, setQuery] = useState("");
@@ -28,7 +29,6 @@ function Browse() {
     try {
       const result = await getMovieSearch(query);
 
-      console.log(result);
       setTotalPage(result.total_pages);
       setTotalResults(result.total_results);
 
@@ -74,6 +74,31 @@ function Browse() {
       console.error(error);
     }
   };
+
+  const initMovies = async () => {
+    try {
+      const result = await getMovieSearch("a");
+      const finalResults = result.results.map((movie) => {
+        return {
+          key: movie.id,
+          title: movie.title,
+          genres: movie.genre_ids.map((genre) => genre),
+          rating: movie.vote_average.toFixed(1),
+          year: movie.release_date.split("-")[0],
+          posterUrl: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+            : null,
+        };
+      });
+      setMovieList(finalResults);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    initMovies();
+  }, []);
 
   return (
     <>

@@ -24,6 +24,7 @@ export default function HomeMovieList({ headerTitle, movieList }) {
       >
         {movieList.map((movie) => (
           <HomeMovieCard
+            id={movie.id}
             key={movie.title}
             title={movie.title}
             genres={movie.genres}

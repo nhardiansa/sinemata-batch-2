@@ -8,6 +8,7 @@ export default function BrowseMovieGrid({ movieList }) {
         {movieList.length ? (
           movieList.map((movie) => (
             <HomeMovieCard
+              id={movie.key}
               key={movie.title}
               title={movie.title}
               genres={movie.genres}

@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="hero mt-4 h-fit">
+    <section className="mt-4 h-fit">
       <div className="hero-wrapper max-w-7xl mx-auto relative h-[400px]">
         <div className="image-wrapper absolute w-full h-full">
           <img
@@ -23,7 +23,7 @@ export default function Hero() {
             </h1>
           </div>
           <div className="metadata text-sm flex gap-3 items-center mt-3">
-            <div className="rating text-amber-600 flex items-center gap-1">
+            <div className="text-amber-600 flex items-center gap-1">
               <span className="star text-lg">★</span>
               <span className="rating-value">8.5</span>
             </div>
