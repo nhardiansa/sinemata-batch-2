@@ -1,14 +1,11 @@
 import { Link } from "react-router";
 import { useWatchlist } from "../store/useWatchlist";
-import { useEffect } from "react";
+import { useGenres } from "../store/useGenres";
 
 function HomeMovieCard({ title, rating, year, posterUrl, genres, id = null }) {
   const { watchlist, addMovieToWatchlist, removeMovieFromWatchlist } =
     useWatchlist((state) => state);
-
-  useEffect(() => {
-    console.log(watchlist);
-  }, [watchlist]);
+  const { genres: genresList } = useGenres((state) => state);
 
   const handlerAddToWatchlist = () => {
     if (watchlist.find((movie) => movie.id === id)) {
@@ -27,6 +24,13 @@ function HomeMovieCard({ title, rating, year, posterUrl, genres, id = null }) {
     });
   };
 
+  const genresHandler = () => {
+    return genresList
+      .filter((genre) => genres.includes(genre.id))
+      .map((genre) => genre.name.toUpperCase())
+      .join(" · ");
+  };
+
   return (
     <div className="card-item min-w-50 max-w-50">
       <div className="image-wrapper relative">
@@ -42,7 +46,7 @@ function HomeMovieCard({ title, rating, year, posterUrl, genres, id = null }) {
         {/* <!-- Action --> */}
         <div className="genre-favorite-btn absolute top-0 w-full flex justify-between items-center px-2 py-3">
           <span className="text-xs text-white font-bold leading-normal">
-            {genres.join(" · ")}
+            {genresHandler()}
           </span>
 
           <div className="favorite-btn w-8 h-8 flex items-center justify-center bg-black/60 rounded-full">

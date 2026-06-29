@@ -54,3 +54,18 @@ export const getDetailsMovie = async (id) => {
     return null;
   }
 }
+
+export const getGenres = async () => {
+  try {
+    const url = `https://api.themoviedb.org/3/genre/movie/list`;
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_KEY}`,
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
