@@ -12,7 +12,7 @@ export default function Watchlist() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-x-3 mt-8">
           <div className="ornament w-1 h-8 bg-amber-600"></div>
-          <h2 className="font-secondary text-4xl">watchlist</h2>
+          <h2 className="font-secondary text-4xl">my watchlist</h2>
         </div>
 
         {/* List Movie */}

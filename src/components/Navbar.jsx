@@ -1,6 +1,13 @@
 import { Link } from "react-router";
+import { useAuth } from "../store/useAuth";
 
 function Navbar() {
+  const { user, logout } = useAuth((state) => state);
+
+  const logoutHandler = () => {
+    logout();
+  };
+
   return (
     <nav className="py-5 bg-[#1c2127]">
       <div className="nav-wrapper flex items-center justify-between max-w-7xl mx-auto">
@@ -36,11 +43,43 @@ function Navbar() {
           />
 
           {/* <!-- Profile photo --> */}
-          <div className="profile-photo cursor-pointer flex items-center justify-center w-9 h-9 rounded-full bg-amber-600">
-            <span className="initials font-primary text-[#14181c] text-sm font-bold">
-              AB
-            </span>
-          </div>
+          {!user ? (
+            <Link to="/login">
+              <span className="font-primary text-amber-600 text-sm font-bold">
+                Login
+              </span>
+            </Link>
+          ) : (
+            <>
+              <button
+                popoverTarget="sinemata-popover-1"
+                className="profile-photo cursor-pointer flex items-center justify-center w-9 h-9 rounded-full bg-amber-600"
+                style={{ anchorName: "--sinemata-anchor-1" }}
+              >
+                <span className="initials font-primary text-[#14181c] text-sm font-bold">
+                  {user.displayName
+                    .split(" ")
+                    .map((word) => word[0])
+                    .join("")}
+                </span>
+              </button>
+
+              <ul
+                className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                popover="auto"
+                id="sinemata-popover-1"
+                style={
+                  {
+                    positionAnchor: "--sinemata-anchor-1",
+                  } /* as React.CSSProperties */
+                }
+              >
+                <li onClick={logoutHandler}>
+                  <span className="font-bold text-red-500">Logout</span>
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
 
