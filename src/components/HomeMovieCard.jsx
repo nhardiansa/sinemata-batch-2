@@ -1,20 +1,30 @@
-import { Link } from "react-router";
-import { useWatchlist } from "../store/useWatchlist";
+import { Link, useNavigate } from "react-router";
 import { useGenres } from "../store/useGenres";
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+  useWatchlist,
+} from "../utils/watchlist";
+import { useAuth } from "../store/useAuth";
 
 function HomeMovieCard({ title, rating, year, posterUrl, genres, id = null }) {
-  const { watchlist, addMovieToWatchlist, removeMovieFromWatchlist } =
-    useWatchlist((state) => state);
+  const navigate = useNavigate();
   const { genres: genresList } = useGenres((state) => state);
+  const { user } = useAuth((state) => state);
+  const watchlist = useWatchlist(user?.uid);
 
   const handlerAddToWatchlist = () => {
-    if (watchlist.find((movie) => movie.id === id)) {
-      removeMovieFromWatchlist({ id });
+    if (!user) {
+      navigate("/login");
       return;
     }
 
-    addMovieToWatchlist({
-      key: id,
+    if (watchlist.find((movie) => movie.id === id)) {
+      removeFromWatchlist(user.uid, id);
+      return;
+    }
+
+    addToWatchlist(user.uid, {
       id,
       title,
       posterUrl,

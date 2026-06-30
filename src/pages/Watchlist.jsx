@@ -1,10 +1,13 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BrowseMovieGrid from "../components/BrowseMovieGrid";
-import { useWatchlist } from "../store/useWatchlist";
+import { useWatchlist as useWatchlistFirebase } from "../utils/watchlist";
+import { useAuth } from "../store/useAuth";
 
 export default function Watchlist() {
-  const { watchlist } = useWatchlist((state) => state);
+  const { user } = useAuth((state) => state);
+  const movies = useWatchlistFirebase(user.uid);
+
   return (
     <>
       <Navbar />
@@ -16,7 +19,7 @@ export default function Watchlist() {
         </div>
 
         {/* List Movie */}
-        <BrowseMovieGrid movieList={watchlist} />
+        <BrowseMovieGrid movieList={movies} />
       </div>
 
       <Footer />
